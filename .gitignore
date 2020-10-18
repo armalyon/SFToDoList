@@ -1,0 +1,17 @@
+/workspace.xml
+.idea
+*.iws
+*.iml
+*.ipr
+
+*.class
+
+.idea
+*.iml
+
+.classpath
+.project
+.settings/
+target/
+IlluminatedCloud/DevConnection/
+IlluminatedCloud/dev_org_connection/
