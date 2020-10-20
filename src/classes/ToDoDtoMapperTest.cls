@@ -6,6 +6,7 @@ private class ToDoDtoMapperTest {
     public static ToDoDto todoDto = new ToDoDto();
     public static List<ToDo__c> todos = new List<ToDo__c>();
     public static List<ToDoDto> todoDtos = new List<ToDoDto>();
+    public static List<Id> ids = new List<Id>();
 
     @TestSetup
     public static void setUp(){
@@ -27,7 +28,7 @@ private class ToDoDtoMapperTest {
 
         todos.add(todo);
         todoDtos.add(todoDto);
-
+        ids.add(todo.Id);
     }
 
 
@@ -61,6 +62,16 @@ private class ToDoDtoMapperTest {
             System.assertEquals(todoDto.category, result.category);
         }
 
+    }
+
+    @IsTest
+    static void mapToDosListToIdsListShouldReturnIdsList(){
+        Test.startTest();
+        List<Id> results = ToDoDtoMapper.mapToDosListToIdsList(todos);
+        Test.stopTest();
+        for (Id result: results){
+            System.assertEquals(todo.Id, result);
+        }
     }
 
 }

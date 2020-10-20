@@ -10,6 +10,7 @@ public with sharing class ToDoDtoMapper {
         dto.category = toDo.Category__c;
         dto.startDate = toDo.Start_Date__c;
         dto.deadline = toDo.Deadline__c;
+        dto.recordTypeName = [SELECT Name FROM RecordType WHERE Id = :toDo.RecordTypeId].Name;
 
         return dto;
     }

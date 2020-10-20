@@ -5,7 +5,7 @@ trigger ToDoTrigger on ToDo__c (after insert, after update, after delete) {
         ToDoTriggerHandler.handleAfterInsert(Trigger.new);
     } else if (Trigger.isUpdate && Trigger.isAfter) {
         ToDoTriggerHandler.handleAfterUpdate(Trigger.new);
-    } else if (Trigger.isAfter && Trigger.isBefore) {
+    } else if (Trigger.isDelete && Trigger.isAfter) {
         ToDoTriggerHandler.handleAfterDelete(Trigger.old);
     }
 

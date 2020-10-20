@@ -12,7 +12,7 @@ public with sharing class ExternalToDoMetadataManager {
         ].Oauth_URL__c;
     }
 
-    public static String getURL() {
+    public static String geToDoURL() {
         return [
                 SELECT ToDos_URL__c
                 FROM Second_Org_URLs__mdt
@@ -33,6 +33,14 @@ public with sharing class ExternalToDoMetadataManager {
         credentialsDto.clientSecret = credentials.Client_Secret__c;
 
         return credentialsDto;
+    }
+
+    public static String getSubToDoURL(){
+        return [
+                SELECT SubToDos_URL__c
+                FROM Second_Org_URLs__mdt
+                WHERE MasterLabel = :URL_METADATA_LABEL
+        ].SubToDos_URL__c;
     }
 
 }

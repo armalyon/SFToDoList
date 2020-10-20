@@ -8,5 +8,6 @@ public with sharing class ToDoDto {
     public Date deadline { get; set; }
     public String category { get; set; }
     public String status { get; set; }
+    public String recordTypeName {get; set;}
 
 }

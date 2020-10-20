@@ -5,11 +5,12 @@ public with sharing class ExternalToDoCalloutManager {
     public final static String METHOD_DELETE = 'DELETE';
 
     @Future(Callout = true)
-    public static void sendRequest(String jsonToSend, String httpMethod) {
+    public static void sendRequest(String jsonToSend, String url, String httpMethod) {
+        System.debug('>>>>>>>>>>>>>>objects:  ' + jsonToSend);
+
         OauthData oauthData = getOauthData();
 
         if (oauthData.access_token != null) {
-            String url = ExternalToDoMetadataManager.getURL();
 
             Http postHttp = new Http();
             HttpRequest postRequest = new HttpRequest();
@@ -17,8 +18,8 @@ public with sharing class ExternalToDoCalloutManager {
             postRequest.setEndpoint(url);
             postRequest.setHeader('Content-Type', 'application/json');
             postRequest.setHeader('Authorization', 'Bearer ' + oauthData.access_token);
-
             postRequest.setBody(jsonToSend);
+
             HttpResponse httpResponse = postHttp.send(postRequest);
 
             System.debug(httpResponse);

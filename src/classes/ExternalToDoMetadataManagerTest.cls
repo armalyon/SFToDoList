@@ -1,8 +1,9 @@
 
 @IsTest
 private class ExternalToDoMetadataManagerTest {
-    public static final String MAIN_URL = 'https://epam2-dev-ed.lightning.force.com/services/apexrest/todos';
-    public static final String OAUTH_URL = 'https://epam2-dev-ed.lightning.force.com/services/oauth2/token';
+    public static final String TODOS_URL = 'https://epam2-dev-ed.my.salesforce.com/services/apexrest/todos';
+    public static final String SUB_TODOS_URL = 'https://epam2-dev-ed.my.salesforce.com/services/apexrest/subtodos';
+    public static final String OAUTH_URL = 'https://epam2-dev-ed.my.salesforce.com/services/oauth2/token';
 
 
     @IsTest
@@ -18,9 +19,9 @@ private class ExternalToDoMetadataManagerTest {
     static void getURLShouldReturnCorrectUrl() {
         String result;
         Test.startTest();
-        result = ExternalToDoMetadataManager.getURL();
+        result = ExternalToDoMetadataManager.geToDoURL();
         Test.stopTest();
-        System.assertEquals(MAIN_URL, result);
+        System.assertEquals(TODOS_URL, result);
     }
 
     @IsTest(SeeAllData = true)
@@ -43,5 +44,13 @@ private class ExternalToDoMetadataManagerTest {
         System.assertEquals(credentialsDto.password, result.password);
         System.assertEquals(credentialsDto.clientSecret, result.clientSecret);
         System.assertEquals(credentialsDto.clientId, result.clientId);
+    }
+
+    @IsTest
+    static void getSubToDoURLShouldReturnURL(){
+        Test.startTest();
+        String result = ExternalToDoMetadataManager.getSubToDoURL();
+        Test.stopTest();
+        System.assertEquals(SUB_TODOS_URL, result);
     }
 }
