@@ -1,8 +1,11 @@
 
 public with sharing class ExternalToDoCalloutManager {
+    public final static String METHOD_POST = 'POST';
+    public final static String METHOD_PUT = 'PUT';
+    public final static String METHOD_DELETE = 'DELETE';
 
     @Future(Callout = true)
-    public static void postNewToDos(String todosJson) {
+    public static void sendRequest(String jsonToSend, String httpMethod) {
         OauthData oauthData = getOauthData();
 
         if (oauthData.access_token != null) {
@@ -10,12 +13,12 @@ public with sharing class ExternalToDoCalloutManager {
 
             Http postHttp = new Http();
             HttpRequest postRequest = new HttpRequest();
-            postRequest.setMethod('POST');
+            postRequest.setMethod(httpMethod);
             postRequest.setEndpoint(url);
             postRequest.setHeader('Content-Type', 'application/json');
             postRequest.setHeader('Authorization', 'Bearer ' + oauthData.access_token);
 
-            postRequest.setBody(todosJson);
+            postRequest.setBody(jsonToSend);
             HttpResponse httpResponse = postHttp.send(postRequest);
 
             System.debug(httpResponse);

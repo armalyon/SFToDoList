@@ -24,4 +24,14 @@ public with sharing class ToDoDtoMapper {
         return dtos;
     }
 
+    public static List<Id> mapToDosListToIdsList(List<ToDo__c> todos){
+        List<Id> ids = new List<Id>();
+
+        for (ToDo__c todo: todos){
+            ids.add(todo.Id);
+        }
+
+        return ids;
+    }
+
 }
