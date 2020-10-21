@@ -1,23 +1,22 @@
 
-@IsTest
+@IsTest(SeeAllData = true)
 private class ToDoDtoMapperTest {
 
-    public static ToDo__c todo = new ToDo__c();
-    public static ToDoDto todoDto = new ToDoDto();
-    public static List<ToDo__c> todos = new List<ToDo__c>();
-    public static List<ToDoDto> todoDtos = new List<ToDoDto>();
-    public static List<Id> ids = new List<Id>();
+    public static ToDo__c todo = new ToDo__c(
+            Name = 'ToDo 1',
+            Description__c = 'This ToDo for testing 1',
+            Start_Date__c = System.today(),
+            Deadline__c = System.today() + 1,
+            Status__c = 'Planned',
+            Category__c = 'Work',
+            Id = 'a0009000001BGNeAAO',
+            RecordTypeId = Schema.SObjectType.ToDo__c.getRecordTypeInfosByName().get('Personal').getRecordTypeId()
+    );
 
-    @TestSetup
-    public static void setUp(){
-        todo.Name = 'ToDo 1';
-        todo.Description__c = 'This ToDo for testing 1';
-        todo.Start_Date__c = System.today();
-        todo.Deadline__c = System.today() + 1;
-        todo.Status__c = 'Planned';
-        todo.Category__c = 'Personal';
-        todo.Id = 'a0009000001BGNeAAO';
 
+    @IsTest
+    static void mapToDoToDtoShouldReturnDto() {
+        ToDoDto todoDto = new ToDoDto();
         todoDto.id = todo.Id;
         todoDto.name = todo.Name;
         todoDto.description = todo.Description__c;
@@ -25,15 +24,8 @@ private class ToDoDtoMapperTest {
         todoDto.deadline = todo.Deadline__c;
         todoDto.status = todo.Status__c;
         todoDto.category = todo.Category__c;
+        todoDto.recordTypeName = 'Personal';
 
-        todos.add(todo);
-        todoDtos.add(todoDto);
-        ids.add(todo.Id);
-    }
-
-
-    @IsTest
-    static void mapToDoToDtoShouldReturnDto() {
         Test.startTest();
         ToDoDto result = ToDoDtoMapper.mapToDoToDto(todo);
         Test.stopTest();
@@ -48,11 +40,24 @@ private class ToDoDtoMapperTest {
 
 
     @IsTest
-    static void mapToDosListToDtoListShouldReturnToDoDtosList(){
+    static void mapToDosListToDtoListShouldReturnToDoDtosList() {
+        ToDoDto todoDto = new ToDoDto();
+        todoDto.id = todo.Id;
+        todoDto.name = todo.Name;
+        todoDto.description = todo.Description__c;
+        todoDto.startDate = todo.Start_Date__c;
+        todoDto.deadline = todo.Deadline__c;
+        todoDto.status = todo.Status__c;
+        todoDto.category = todo.Category__c;
+        todoDto.recordTypeName = 'Personal';
+
+        List<ToDo__c> todos = new List<ToDo__c>();
+        todos.add(todo);
+
         Test.startTest();
         List<ToDoDto> results = ToDoDtoMapper.mapToDosListToDtoList(todos);
         Test.stopTest();
-        for (ToDoDto result: results){
+        for (ToDoDto result : results) {
             System.assertEquals(todoDto.id, result.id);
             System.assertEquals(todoDto.name, result.name);
             System.assertEquals(todoDto.description, result.description);
@@ -65,11 +70,14 @@ private class ToDoDtoMapperTest {
     }
 
     @IsTest
-    static void mapToDosListToIdsListShouldReturnIdsList(){
+    static void mapToDosListToIdsListShouldReturnIdsList() {
+        List<ToDo__c> todos = new List<ToDo__c>();
+        todos.add(todo);
+
         Test.startTest();
         List<Id> results = ToDoDtoMapper.mapToDosListToIdsList(todos);
         Test.stopTest();
-        for (Id result: results){
+        for (Id result : results) {
             System.assertEquals(todo.Id, result);
         }
     }

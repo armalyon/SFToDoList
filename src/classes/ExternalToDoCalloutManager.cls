@@ -6,7 +6,6 @@ public with sharing class ExternalToDoCalloutManager {
 
     @Future(Callout = true)
     public static void sendRequest(String jsonToSend, String url, String httpMethod) {
-        System.debug('>>>>>>>>>>>>>>objects:  ' + jsonToSend);
 
         OauthData oauthData = getOauthData();
 
@@ -22,7 +21,7 @@ public with sharing class ExternalToDoCalloutManager {
 
             HttpResponse httpResponse = postHttp.send(postRequest);
 
-            System.debug(httpResponse);
+            System.debug('External Org Callout Response: ' + httpResponse);
         }
 
     }
@@ -34,7 +33,7 @@ public with sharing class ExternalToDoCalloutManager {
         Http http = new Http();
         HttpRequest request = new HttpRequest();
         request.setEndpoint(ExternalToDoMetadataManager.getOauthUrl());
-        request.setMethod('POST');
+        request.setMethod(METHOD_POST);
         request.setHeader('Content-Type', 'application/x-www-form-urlencoded');
         request.setBody(getOauthRequestBody(credentials));
         HttpResponse response = http.send(request);
