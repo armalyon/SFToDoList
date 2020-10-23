@@ -1,0 +1,13 @@
+<template>
+
+    <lightning-card title="Tasks" variant="Narrow" icon-name="standard:task">
+        <template for:each={records} for:item="record">
+            <c-to-do-card
+                    key={record.Id}
+                    record-id={record.Id}
+                    onrecordscountupdated={loadRecords}></c-to-do-card>
+        </template>
+
+   </lightning-card>
+
+</template>

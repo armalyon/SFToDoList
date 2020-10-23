@@ -1,0 +1,32 @@
+<template>
+    <template if:true={recordId}>
+        <lightning-card variant="Narrow" title={name} icon-name="standard:task2">
+            <div class="slds-p-horizontal_small">
+
+                <div class="slds-m-bottom_x-small">
+                    <lightning-button-icon icon-name="utility:edit"
+                                           variant="brand"
+                                           alternative-text="Delete"
+                                           class="slds-m-left_xx-small"
+                                           title="Delete"
+                                           onclick={handleClickOnEdit}>
+                    </lightning-button-icon>
+                   <lightning-button-icon icon-name="utility:delete"
+                                           variant="brand"
+                                           alternative-text="Delete"
+                                           class="slds-m-left_xx-small"
+                                           title="Delete"
+                                           onclick={handleClickOnDelete}>
+                    </lightning-button-icon>
+                </div>
+            </div>
+            <hr/>
+        </lightning-card>
+        <template if:true={isOpenEditModal}>
+            <c-edit-to-do-modal
+                    is-open={isOpenEditModal}
+                    onclosemodal={closeEditModal}>
+            </c-edit-to-do-modal>
+        </template>
+    </template>
+</template>
