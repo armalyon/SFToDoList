@@ -1,13 +1,29 @@
 <template>
 
-    <lightning-card title="Tasks" variant="Narrow" icon-name="standard:task">
-        <template for:each={records} for:item="record">
-            <c-to-do-card
-                    key={record.Id}
-                    record-id={record.Id}
-                    onrecordscountupdated={loadRecords}></c-to-do-card>
-        </template>
+    <lightning-card variant="Narrow" icon-name="standard:task" class="slds-m-bottom_medium slds-m-left_medium">
+        <h1 slot="title">Tasks to do</h1>
+        <lightning-button-icon icon-name="utility:add"
+                               variant="brand"
+                               class="slds-m-left_xx-small slds-m-left_medium"
+                               title="Add"
+                               onclick={handleClickCreateTodo}>
+        </lightning-button-icon>
+        <div class="slds-m-top_x-small">
+            <template for:each={todos} for:item="todo">
+                <div class=slds-m-top_xx-small key={todo.Id}>
+                    <c-to-do-card
+                            todo={todo}
+                            ondeletetodo={handleDeleteTodo}
+                            onrefreshlist={refreshList}>
+                    </c-to-do-card>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
 
-   </lightning-card>
 
+    <template if:true={isOpenCreateModal}>
+        <c-edit-to-do-modal todo={todo} is-create-mode={isOpenCreateModal} onclosemodal={closeCreateModal}>
+        </c-edit-to-do-modal>
+    </template>
 </template>

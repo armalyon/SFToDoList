@@ -3,7 +3,7 @@
     <apiVersion>50.0</apiVersion>
     <description>Edit To Do Modal</description>
     <isExposed>true</isExposed>
-	<targets>
+    <targets>
         <target>lightning__AppPage</target>
         <target>lightning__RecordPage</target>
         <target>lightning__HomePage</target>

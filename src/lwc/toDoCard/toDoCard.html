@@ -1,32 +1,45 @@
 <template>
-    <template if:true={recordId}>
-        <lightning-card variant="Narrow" title={name} icon-name="standard:task2">
-            <div class="slds-p-horizontal_small">
+  <lightning-card
+          variant="Narrow"
+          icon-name="standard:task2"
+          class="todo-card">
+    <div slot="title">
+      <a onclick={showExpandOrCollapsed}> {todo.Name}</a>
+    </div>
+    <div slot="actions">Deadline: {todo.Deadline__c}</div>
 
-                <div class="slds-m-bottom_x-small">
-                    <lightning-button-icon icon-name="utility:edit"
-                                           variant="brand"
-                                           alternative-text="Delete"
-                                           class="slds-m-left_xx-small"
-                                           title="Delete"
-                                           onclick={handleClickOnEdit}>
-                    </lightning-button-icon>
-                   <lightning-button-icon icon-name="utility:delete"
-                                           variant="brand"
-                                           alternative-text="Delete"
-                                           class="slds-m-left_xx-small"
-                                           title="Delete"
-                                           onclick={handleClickOnDelete}>
-                    </lightning-button-icon>
-                </div>
-            </div>
-            <hr/>
-        </lightning-card>
-        <template if:true={isOpenEditModal}>
-            <c-edit-to-do-modal
-                    is-open={isOpenEditModal}
-                    onclosemodal={closeEditModal}>
-            </c-edit-to-do-modal>
-        </template>
+    <template if:true={showExpandBody}>
+      <div class="todo-body" >
+        <lightning-record-view-form
+                aria-colcount="2"
+                record-id={todo.Id}
+                object-api-name="ToDo__c">
+          <lightning-output-field field-name="Description__c"></lightning-output-field>
+          <lightning-output-field field-name="Category__c"></lightning-output-field>
+          <lightning-output-field field-name="Start_Date__c"></lightning-output-field>
+          <lightning-output-field field-name="Status__c"></lightning-output-field>
+
+
+
+          <lightning-button-icon icon-name="utility:edit"
+                                 variant="brand"
+                                 class="slds-m-left_xx-small"
+                                 title="Edit"
+                                 onclick={handleClickOnEdit}>
+          </lightning-button-icon>
+          <lightning-button-icon icon-name="utility:delete"
+                                 variant="brand"
+                                 class="slds-m-left_xx-small"
+                                 title="Delete"
+                                 onclick={handleClickOnDelete}>
+          </lightning-button-icon>
+
+        </lightning-record-view-form>
+      </div>
     </template>
+  </lightning-card>
+  <template if:true={isOpenEditModal}>
+    <c-edit-to-do-modal todo={todo} is-open={isOpenEditModal} onclosemodal={closeEditModal}>
+    </c-edit-to-do-modal>
+  </template>
 </template>
