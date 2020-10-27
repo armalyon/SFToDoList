@@ -1,0 +1,50 @@
+<template>
+    <hr class="delimiter"/>
+
+    <template if:false={isEditForm}>
+        <lightning-card variant="Narrow" icon-name="utility:check" title={subToDo.Name}>
+            <lightning-record-view-form
+                    aria-colcount="2"
+                    record-id={recordId}
+                    object-api-name="Sub_ToDo__c">
+                <div class="slds-grid slds-gutters slds-m-left_x-small">
+                    <div class="slds-col">
+                        <lightning-output-field field-name={descriptionField}></lightning-output-field>
+                    </div>
+                    <div class="slds-col">
+                        <lightning-output-field field-name={isDoneField}></lightning-output-field>
+                    </div>
+                </div>
+            </lightning-record-view-form>
+            <div class="slds-m-left_x-small slds-m-top_x-small">
+                <lightning-button-icon icon-name="utility:edit"
+                                       icon-class="slds-size_xxx-small-small"
+                                       variant="brand"
+                                       class="slds-m-left_xx-small"
+                                       title="Edit"
+                                       onclick={handleClickOnEdit}>
+                </lightning-button-icon>
+                <lightning-button-icon icon-name="utility:delete"
+                                       icon-class="slds-size_xxx-small-small"
+                                       variant="brand"
+                                       class="slds-m-left_xx-small"
+                                       title="Delete"
+                                       onclick={handleClickOnDelete}>
+                </lightning-button-icon>
+            </div>
+        </lightning-card>
+
+    </template>
+    <template if:true={isEditForm}>
+        <lightning-record-form
+                record-id={recordId}
+                object-api-name="Sub_ToDo__c"
+                fields={fields}
+                mode="edit"
+                onsuccess={handleUpdateSubToDo}
+                columns="3"
+                oncancel={switchRecordForm}
+        >
+        </lightning-record-form>
+    </template>
+</template>

@@ -7,7 +7,6 @@ export default class ToDoCard extends LightningElement {
   showExpandBody = false;
 
   handleClickOnDelete() {
-    console.log('log from card: ' + this.todo.Id)
     const deleteEvent = new CustomEvent('deletetodo', {
       detail: this.todo.Id
     });

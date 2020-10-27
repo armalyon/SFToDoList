@@ -8,64 +8,61 @@ import {reduceErrors} from 'c/ldsUtils';
 
 export default class ToDosContainer extends LightningElement {
 
-  todos;
-  todo = {"Id" : null};
-  wiredTodosResult;
-  isOpenCreateModal = false;
+    todos;
+    todo = {"Id": null};
+    wiredTodosResult;
+    isOpenCreateModal = false;
 
-  @wire(getToDoList)
-  loadRecords(result) {
-    this.wiredTodosResult = result;
-    console.log('load records invoked');
-    if (result.data) {
-      this.todos = result.data;
-      console.log(this.todos);
-      this.error = undefined;
-    } else if (result.error) {
-      this.error = result.error;
-      this.todos = undefined;
+    @wire(getToDoList)
+    loadRecords(result) {
+        this.wiredTodosResult = result;
+        if (result.data) {
+            this.todos = result.data;
+            this.error = undefined;
+        } else if (result.error) {
+            this.error = result.error;
+            this.todos = undefined;
+        }
     }
-  }
 
-  connectedCallback() {
-    this.refreshList();
-  }
+    connectedCallback() {
+        this.refreshList();
+    }
 
-  handleDeleteTodo(event) {
-    const todoId = event.detail;
-    console.log('Log from delete handle: ' + todoId)
-    deleteRecord(todoId)
-    .then(() => {
-      this.dispatchEvent(
-          new ShowToastEvent({
-            title: 'Success',
-            message: 'Todo deleted',
-            variant: 'success'
-          })
-      );
-      return refreshApex(this.wiredTodosResult);
-    })
-    .catch((error) => {
-      this.dispatchEvent(
-          new ShowToastEvent({
-            title: 'Error deleting todo',
-            message: reduceErrors(error).join(', '),
-            variant: 'error'
-          })
-      );
-    });
-  }
-  refreshList(){
-    return refreshApex(this.wiredTodosResult);
-  }
+    handleDeleteTodo(event) {
+        const todoId = event.detail;
+        deleteRecord(todoId)
+            .then(() => {
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: 'Success',
+                        message: 'Todo deleted',
+                        variant: 'success'
+                    })
+                );
+                return refreshApex(this.wiredTodosResult);
+            })
+            .catch((error) => {
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: 'Error deleting todo',
+                        message: reduceErrors(error).join(', '),
+                        variant: 'error'
+                    })
+                );
+            });
+    }
 
-  handleClickCreateTodo() {
-    this.isOpenCreateModal = true;
-    console.log('isopen= ' + this.isOpenCreateModal);
-  }
+    refreshList() {
+        return refreshApex(this.wiredTodosResult);
+    }
 
-  closeCreateModal() {
-    this.isOpenCreateModal = false;
-    return this.refreshList();
-  }
+    handleClickCreateTodo() {
+        this.isOpenCreateModal = true;
+    }
+
+    closeCreateModal() {
+        this.isOpenCreateModal = false;
+        return this.refreshList();
+    }
 }

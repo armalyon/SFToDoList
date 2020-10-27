@@ -1,6 +1,6 @@
 <template>
 
-    <lightning-card variant="Narrow" icon-name="standard:task" class="slds-m-bottom_medium slds-m-left_medium">
+    <lightning-card variant="Narrow" icon-name="standard:task" class="slds-m-bottom_medium todo-container">
         <h1 slot="title">Tasks to do</h1>
         <lightning-button-icon icon-name="utility:add"
                                variant="brand"
@@ -8,7 +8,7 @@
                                title="Add"
                                onclick={handleClickCreateTodo}>
         </lightning-button-icon>
-        <div class="slds-m-top_x-small">
+        <div class="slds-m-top_x-small slds-m-left_xx-small">
             <template for:each={todos} for:item="todo">
                 <div class=slds-m-top_xx-small key={todo.Id}>
                     <c-to-do-card
