@@ -17,17 +17,12 @@ export default class EditToDoModal extends LightningElement {
     @track recordTypeId;
     recordTypeIds;
 
-
-    // @wire(getObjectInfo, {objectApiName: TODO_OBJECT})
-    // objectInfo;
-
     @wire(getObjectInfo, {objectApiName: TODO_OBJECT})
     handleObjectInfo({error, data}) {
         if (data) {
             this.recordTypeIds = data.recordTypeInfos;
             this.recordTypeId = Object.keys(this.recordTypeIds).find(
                 rti => this.recordTypeIds[rti].name === this.recordTypeName);
-            console.log('Recordtype id= ' + this.recordTypeId);
         }
     }
 

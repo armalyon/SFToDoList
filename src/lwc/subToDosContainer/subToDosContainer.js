@@ -4,6 +4,9 @@ import {ShowToastEvent} from "lightning/platformShowToastEvent";
 import {reduceErrors} from 'c/ldsUtils';
 import {refreshApex} from "@salesforce/apex";
 import {deleteRecord} from "lightning/uiRecordApi";
+import NAME_FIELD from '@salesforce/schema/Sub_ToDo__c.Name'
+import DESCRIPTION_FIELD from '@salesforce/schema/Sub_ToDo__c.Description__c'
+import TODO_FIELD from '@salesforce/schema/Sub_ToDo__c.ToDo__c'
 
 
 export default class SubToDosContainer extends LightningElement {
@@ -12,9 +15,13 @@ export default class SubToDosContainer extends LightningElement {
     @api toDoId;
     subToDos;
     wiredResult;
+    isCreateMode = false;
+    toField = TODO_FIELD;
+    descriptionField = DESCRIPTION_FIELD;
+    nameField = NAME_FIELD;
 
     renderedCallback() {
-        this.refreshList();
+      return this.refreshList();
     }
 
     @wire(getSubToDoListByParentToDoId, {toDoId: '$toDoId'})
@@ -46,7 +53,7 @@ export default class SubToDosContainer extends LightningElement {
                 this.dispatchEvent(
                     new ShowToastEvent({
                         title: 'Success',
-                        message: 'Todo deleted',
+                        message: 'Sub-Todo deleted',
                         variant: 'success'
                     })
                 );
@@ -63,6 +70,21 @@ export default class SubToDosContainer extends LightningElement {
             this.refreshList();
         });
 
+    }
+
+    handleClickCreateSubTodo() {
+        if (!this.isCreateMode) {
+            this.isCreateMode = !this.isCreateMode;
+        }
+    }
+
+    handleCancelCreateSubToDo() {
+        this.isCreateMode = false;
+    }
+
+    handleCreateSubToDo() {
+        this.isCreateMode = false;
+        this.refreshList();
     }
 
 }
