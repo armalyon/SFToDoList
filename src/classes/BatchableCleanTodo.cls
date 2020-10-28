@@ -14,7 +14,6 @@ public with sharing class BatchableCleanTodo implements Database.Batchable <SObj
 
     public void execute(Database.BatchableContext param1, List<ToDo__c> todos) {
         System.debug('Execute batch');
-
         if(!Test.isRunningTest()) {
             Set<Id> resultIds = (new Map<Id, ToDo__c>(todos)).keySet();
             ExternalToDoCalloutManager.sendRequestSync(
