@@ -35,11 +35,9 @@ public with sharing class ExternalToDoMetadataManager {
     }
 
     public static String getSubToDoURL(){
-        return [
-                SELECT SubToDos_URL__c
+        return [SELECT SubToDos_URL__c
                 FROM Second_Org_URLs__mdt
-                WHERE MasterLabel = :URL_METADATA_LABEL
-        ].SubToDos_URL__c;
+                WHERE MasterLabel = :URL_METADATA_LABEL].SubToDos_URL__c;
     }
 
 }

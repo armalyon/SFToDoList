@@ -28,8 +28,7 @@ public with sharing class ToDoDtoMapper {
         List<Id> ids = new List<Id>();
 
         for (ToDo__c todo: todos){
-            ids.add(todo.Id);
-        }
+            ids.add(todo.Id);}
 
         return ids;
     }
