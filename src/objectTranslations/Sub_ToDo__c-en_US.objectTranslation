@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Sub-ToDo</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Sub-ToDos</value>
+    </caseValues>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- ExternalId --></label>
+        <name>ExternalId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Done --></label>
+        <name>IsDone__c</name>
+    </fields>
+    <fields>
+        <label><!-- ToDo --></label>
+        <name>ToDo__c</name>
+        <relationshipLabel><!-- Sub-ToDos --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Sub-ToDo Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesSendEmailToMembers>true</doesSendEmailToMembers>
+    <name>PersonalTodoQueue</name>
+    <queueMembers>
+        <users>
+            <user>a.r.malon@sftodo.com</user>
+            <user>krabog@sftodo.com</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>ToDo__c</sobjectType>
+    </queueSobject>
+</Queue>
