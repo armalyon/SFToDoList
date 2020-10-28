@@ -5,28 +5,10 @@ public with sharing class ExternalToDoCalloutManager {
 
     @Future(Callout = true)
     public static void sendRequest(String jsonToSend, String url, String httpMethod) {
-
-        OauthData oauthData = getOauthData();
-
-        if (oauthData.access_token != null) {
-
-            Http postHttp = new Http();
-            HttpRequest postRequest = new HttpRequest();
-            postRequest.setMethod(httpMethod);
-            postRequest.setEndpoint(url);
-            postRequest.setHeader('Content-Type', 'application/json');
-            postRequest.setHeader('Authorization', 'Bearer ' + oauthData.access_token);
-            postRequest.setBody(jsonToSend);
-
-            HttpResponse httpResponse = postHttp.send(postRequest);
-
-            System.debug('External Org Callout Response: ' + httpResponse);
-        }
-
+        sendRequestSync(jsonToSend, url, httpMethod);
     }
 
     public static void sendRequestSync(String jsonToSend, String url, String httpMethod) {
-
         OauthData oauthData = getOauthData();
 
         if (oauthData.access_token != null) {

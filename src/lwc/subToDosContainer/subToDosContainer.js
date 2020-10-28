@@ -21,7 +21,7 @@ export default class SubToDosContainer extends LightningElement {
     nameField = NAME_FIELD;
 
     renderedCallback() {
-        this.refreshList();
+      return this.refreshList();
     }
 
     @wire(getSubToDoListByParentToDoId, {toDoId: '$toDoId'})
@@ -53,7 +53,7 @@ export default class SubToDosContainer extends LightningElement {
                 this.dispatchEvent(
                     new ShowToastEvent({
                         title: 'Success',
-                        message: 'Todo deleted',
+                        message: 'Sub-Todo deleted',
                         variant: 'success'
                     })
                 );
@@ -83,9 +83,8 @@ export default class SubToDosContainer extends LightningElement {
     }
 
     handleCreateSubToDo() {
-        this.template.querySelector('lightning-record-edit-form').submit()
         this.isCreateMode = false;
-
+        this.refreshList();
     }
 
 }
