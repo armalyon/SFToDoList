@@ -34,9 +34,9 @@ public with sharing class BatchableCleanTodoTest {
     static ToDo__c createTestRecord() {
         ToDo__c testTodo = new ToDo__c(
                 Name = 'Test record', Description__c = 'Test Batch Delete',
-                Status__c = 'Canceled', Category__c = 'Personal',
-                Start_Date__c = Date.today().addDays(-20),
-                Deadline__c = Date.today().addDays(-10));
+                Status__c = 'Done', Category__c = 'Personal',
+                Start_Date__c = Date.today().addDays(-30),
+                Deadline__c = Date.today().addDays(-20));
         insert testTodo;
         return testTodo;
     }

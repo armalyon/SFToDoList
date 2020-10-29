@@ -17,6 +17,12 @@ export default class ToDoCard extends LightningElement {
     this.isOpenEditModal = true;
   }
 
+  get styleBack() {
+    if (this.todo.Status__c === 'Done') {
+      return `background-color: blue`;
+    }
+  }
+
   closeEditModal() {
     this.isOpenEditModal = false;
     this.dispatchEvent(new CustomEvent('refreshlist'));

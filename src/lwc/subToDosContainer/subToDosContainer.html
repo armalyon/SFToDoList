@@ -3,47 +3,46 @@
         <h1 slot="title">Sub ToDos</h1>
         <lightning-button-icon icon-name="utility:add"
                                variant="brand"
-                               class="slds-m-left_xx-small slds-m-left_medium"
+                               class="slds-m-left_small slds-m-bottom_x-small"
                                title="Add"
                                onclick={handleClickCreateSubTodo}>
         </lightning-button-icon>
-        <template if:true={isCreateMode}>
-            <hr class="delimiter"/>
-
-            <lightning-record-edit-form
-                    onsuccess={handleCreateSubToDo}
-                    object-api-name="Sub_ToDo__c">
-                <div class="slds-grid slds-gutters slds-m-left_x-small">
-                    <div class="slds-col">
-                        <lightning-input-field field-name={nameField}></lightning-input-field>
+        <div class="slds-p-top_small">
+            <template if:true={isCreateMode}>
+                <hr class="delimiter "/>
+                <lightning-record-edit-form
+                        onsuccess={handleCreateSubToDo}
+                        object-api-name="Sub_ToDo__c">
+                    <div class="slds-grid slds-gutters">
+                        <div class="slds-col slds-p-top_xx-small slds-p-bottom_xx-small">
+                            <lightning-input-field field-name={nameField}></lightning-input-field>
+                        </div>
+                        <div class="slds-col slds-p-top_xx-small slds-p-bottom_xx-small">
+                            <lightning-input-field field-name={descriptionField}></lightning-input-field>
+                        </div>
                     </div>
-                    <div class="slds-col">
-                        <lightning-input-field field-name={descriptionField}></lightning-input-field>
+                    <lightning-input-field field-name={toField}
+                                           value={toDoId}
+                                           disabled="true"
+                                           class="slds-hide"></lightning-input-field>
+                    <div class="slds-align_absolute-center slds-m-top_xx-small">
+                        <lightning-button
+                                class="slds-p-right_small"
+                                variant="brand"
+                                type="submit"
+                                label="Save">
+                        </lightning-button>
+
+                        <lightning-button
+                                class="slds-p-left_small"
+                                type="cancel"
+                                label="Cancel"
+                                onclick={handleCancelCreateSubToDo}>
+                        </lightning-button>
                     </div>
-                </div>
-                <lightning-input-field field-name={toField}
-                                       value={toDoId}
-                                       disabled="true"
-                                       class="slds-hidden"></lightning-input-field>
-                <div class="slds-align_absolute-center">
-                    <lightning-button
-                            class="slds-m-right_small"
-                            variant="brand"
-                            type="submit"
-                            label="Save">
-                    </lightning-button>
-
-                    <lightning-button
-                            class="slds-p-left_small"
-                            type="cancel"
-                            label="Cancel"
-                            onclick={handleCancelCreateSubToDo}>
-                    </lightning-button>
-                </div>
-                
-
-            </lightning-record-edit-form>
-        </template>
+                </lightning-record-edit-form>
+            </template>
+        </div>
         <template for:each={subToDos} for:item="subToDo">
             <c-sub-to-do-card
                     key={subToDo.Id}

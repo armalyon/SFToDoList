@@ -11,7 +11,7 @@ public with sharing class ToDoController {
                         Status__c,
                         Start_Date__c,
                         Deadline__c
-                FROM ToDo__c
+                FROM ToDo__c ORDER BY Start_Date__c
         ];
     }
     

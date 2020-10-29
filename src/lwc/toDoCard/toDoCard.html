@@ -2,16 +2,18 @@
     <lightning-card
             variant="Narrow"
             icon-name="standard:task2"
-            class="todo-card">
-        <div slot="title">
+            class="todo-card" style={styleBack}>
+        <div slot="title" >
             <a onclick={showExpandOrCollapsed}> {todo.Name}</a>
         </div>
-        <div slot="actions">Deadline: {todo.Deadline__c}</div>
+        <div slot="actions">Category:{todo.Category__c}
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            Deadline: {todo.Deadline__c}</div>
 
         <template if:true={showExpandBody}>
 
-            <div class="slds-grid slds-gutters">
-                <div class="slds-col">
+            <div class="slds-grid slds-gutters" >
+                <div class="slds-col" >
                     <div class="todo-body slds-m-top_x-small">
                         <lightning-record-view-form
                                 aria-colcount="2"
