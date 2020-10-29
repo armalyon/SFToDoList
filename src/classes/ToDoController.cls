@@ -1,5 +1,5 @@
 
-public with sharing class ToDoController {
+public class ToDoController {
 
     @AuraEnabled(Cacheable = true)
     public static List<ToDo__c> getToDoList() {
@@ -13,6 +13,7 @@ public with sharing class ToDoController {
                         Start_Date__c,
                         Deadline__c
                 FROM ToDo__c
+                WITH SECURITY_ENFORCED
         ];
     }
 

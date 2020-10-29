@@ -6,7 +6,7 @@
         <div slot="title">
             <a onclick={showExpandOrCollapsed}> {todo.Name}</a>
         </div>
-        <div slot="actions">Deadline: {todo.Deadline__c}</div>
+        <div slot="actions">Category: {todo.Category__c}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deadline: {todo.Deadline__c}</div>
 
         <template if:true={showExpandBody}>
 
