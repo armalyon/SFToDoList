@@ -1,0 +1,10 @@
+.todo-card {
+    border: 1px solid #4ea230;
+    background-color: #64f874;
+    border-radius: .25rem;
+    display: block;
+    width: 90%;
+}
+.todo-body {
+    background: linear-gradient(320deg, rgba(255,255,255,1) 70%, #64f874 100%);
+}

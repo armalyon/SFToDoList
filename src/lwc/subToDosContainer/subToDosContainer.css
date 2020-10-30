@@ -1,0 +1,12 @@
+.subtodos-container {
+    border: 1px solid #4ea230;
+    border-radius: .25rem;
+    display: block;
+    background-color: darkgrey;
+}
+
+.delimiter {
+    color: #4ea230;
+    background-color: #4ea230;
+    margin-bottom: 10px;
+}
